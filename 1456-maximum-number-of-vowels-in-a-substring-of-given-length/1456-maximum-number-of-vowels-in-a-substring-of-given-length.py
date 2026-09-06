@@ -1,20 +1,31 @@
 class Solution:
     def maxVowels(self, s: str, k: int) -> int:
-        currentvowels = 0
-        maxvowels = 0
+        n = len(s)
+        current_vowels = 0
         vowels = set("aeiou")
         for i in range(k):
             if s[i] in vowels:
-                currentvowels += 1
-        maxvowels = max(currentvowels,maxvowels)
+                current_vowels += 1
+        max_vowels = current_vowels
 
-        for i in range(k,len(s)):
-            if s[i] in vowels:
-                currentvowels += 1
-
-            if s[i-k] in vowels:
-                currentvowels -= 1
+        for j in range(k,n):
+            if max_vowels == k:
+                return max_vowels
             
-            maxvowels = max(currentvowels,maxvowels)
-        return maxvowels
+            if s[j] in vowels:
+                current_vowels += 1
+            
+            if s[j-k] in vowels:
+                current_vowels -= 1
+            
+            if current_vowels > max_vowels:
+                max_vowels = current_vowels
+
+        return  max_vowels
+
+
+
+            
+
+
         
